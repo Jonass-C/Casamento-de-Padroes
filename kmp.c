@@ -33,6 +33,7 @@ void arrayLPS (char *padrao, int *lps) {
 void kmp (char *texto, char *padrao) {
     int n = strlen(texto);
     int m = strlen(padrao);
+    long long comparacoes = 0;
 
     if (m == 0 || m > n) {
         return;
@@ -45,16 +46,18 @@ void kmp (char *texto, char *padrao) {
     int j = 0;
 
     while (i < n) {
+        comparacoes++;
+
         if (padrao[j] == texto[i]) {
             i++;
             j++;
-        }
 
-        if (j == m) {
-            printf("\nPadrão encontrado na posição: %d\n", i - j);
-            j = lps[j - 1];
+            if (j == m) {
+                printf("\nPadrão encontrado na posição: %d", i - j);
+                j = lps[j - 1];
+            }
         }
-        else if (i < n && padrao[j] != texto[i]) {
+        else {
             if (j != 0) {
                 j = lps[j - 1];
             }
@@ -63,10 +66,12 @@ void kmp (char *texto, char *padrao) {
             }
         }
     }
+
+    printf("\nComparações: %lld\n", comparacoes);
 }
 
 int main () {
-    char texto[] = "ABABDABACDABABCABAB";
+    char texto[] = "BABABABABCABABCABAB";
     char padrao[] = "ABABCABAB";
 
     kmp(texto, padrao);

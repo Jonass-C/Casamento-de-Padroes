@@ -7,6 +7,7 @@
 void rabinKarp(char *texto, char *padrao) {
     int n = strlen(texto);
     int m = strlen(padrao);
+    long long comparacoes = 0;
 
     if (m == 0 || m > n) {
         return;
@@ -29,12 +30,13 @@ void rabinKarp(char *texto, char *padrao) {
         if (hashPadrao == hashTexto) {
             int j;
             for (j = 0; j < m; j++) {
+                comparacoes++;
                 if (texto[i + j] != padrao[j]) {
                     break;
                 }
             }
             if (j == m) {
-                printf("\nPadrão encontrado na posição %d\n", i);
+                printf("\nPadrão encontrado na posição %d", i);
             }
         }
         if (i < n - m) {
@@ -45,6 +47,8 @@ void rabinKarp(char *texto, char *padrao) {
             }
         }
     }
+
+    printf("\nComparações: %lld\n", comparacoes);
 }
 
 int main () {

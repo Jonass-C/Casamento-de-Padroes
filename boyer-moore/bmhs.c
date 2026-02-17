@@ -7,6 +7,7 @@
 void boyerMooreHorspoolSunday(char *texto, char *padrao) {
     int n = strlen(texto);
     int m = strlen(padrao);
+    long long comparacoes = 0;
 
     if (m == 0 || m > n) {
         return;
@@ -26,12 +27,18 @@ void boyerMooreHorspoolSunday(char *texto, char *padrao) {
     while (shift <= n - m) {
         int j = m - 1;
 
-        while (j >= 0 && padrao[j] == texto[shift + j]) {
+        while (j >= 0) {
+            comparacoes++;
+
+            if(padrao[j] != texto[shift + j]) {
+                break;
+            }
+
             j--;
         }
 
         if (j < 0) {
-            printf("\nPadrão encontrado na posição: %d\n", shift);
+            printf("\nPadrão encontrado na posição: %d", shift);
         }
 
         if (shift + m >= n) {
@@ -40,6 +47,8 @@ void boyerMooreHorspoolSunday(char *texto, char *padrao) {
 
         shift += sundayShift[(unsigned char)texto[shift + m]];
     }
+
+    printf("\nComparações: %lld\n", comparacoes);
 }
 
 int main () {

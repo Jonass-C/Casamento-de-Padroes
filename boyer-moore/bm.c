@@ -45,6 +45,7 @@ void tabelaBomSufixo(char *padrao, int m, int goodSuffix[]) {
 void boyerMoore(char *texto, char *padrao) {
     int n = strlen(texto);
     int m = strlen(padrao);
+    long long comparacoes = 0;
 
     if (m == 0 || m > n) {
         return;
@@ -67,12 +68,18 @@ void boyerMoore(char *texto, char *padrao) {
     while (shift <= (n - m)) {
         int j = m - 1;
 
-        while (j >= 0 && padrao[j] == texto[shift + j]) {
+        while (j >= 0) {
+            comparacoes++;
+
+            if (padrao[j] != texto[shift + j]) {
+                break;
+            }
+
             j--;
         }
 
         if (j < 0) {
-            printf("\nPadrão encontrado na posição: %d\n", shift);
+            printf("\nPadrão encontrado na posição: %d", shift);
             shift += goodSuffix[0];
         } else {
             int badShift = j - badChar[(unsigned char)texto[shift + j]];
@@ -81,6 +88,8 @@ void boyerMoore(char *texto, char *padrao) {
             shift += MAX(1, MAX(badShift, goodShift));
         }
     }
+
+    printf("\nComparações: %lld\n", comparacoes);
 }
 
 int main () {

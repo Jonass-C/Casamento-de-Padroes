@@ -1,3 +1,4 @@
+#include <limits.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -7,6 +8,7 @@
 void boyerMooreHorspool(char *texto, char *padrao) {
     int n = strlen(texto);
     int m = strlen(padrao);
+    long long comparacoes = 0;
 
     if (m == 0 || m > n) {
         return;
@@ -26,16 +28,24 @@ void boyerMooreHorspool(char *texto, char *padrao) {
     while (shift <= (n - m)) {
         int j = m - 1;
 
-        while (j >= 0 && padrao[j] == texto[shift + j]) {
+        while (j >= 0) {
+            comparacoes++;
+
+            if (padrao[j] != texto[shift + j]) {
+                break;
+            }
+
             j--;
         }
 
         if (j < 0) {
-            printf("\nPadrão encontrado na posição: %d\n", shift);
+            printf("\nPadrão encontrado na posição: %d", shift);
         }
 
         shift += tabelaShift[(unsigned char)texto[shift + m - 1]];
     }
+
+    printf("\nComparações: %lld\n", comparacoes);
 }
 
 int main () {
