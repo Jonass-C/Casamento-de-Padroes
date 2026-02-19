@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "../benchmark/benchmark.h"
 
 #define MAX_CHARS 256
 #define MAX(a, b) ((a) > (b) ? (a) : (b)) 
@@ -89,14 +90,9 @@ void boyerMoore(char *texto, char *padrao) {
         }
     }
 
-    printf("\nComparações: %lld\n", comparacoes);
+    printf("\n\nComparações: %lld\n", comparacoes);
 }
 
 int main () {
-    char texto[] = "ABBABAACaaaaaaaaaaaaABAABCABAC";
-    char padrao[] = "ABAA";
-
-    boyerMoore(texto, padrao);
-
-    return 0;
+    executar_testes("Boyer-Moore", boyerMoore);
 }

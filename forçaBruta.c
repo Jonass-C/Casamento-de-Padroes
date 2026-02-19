@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "benchmark/benchmark.h"
 
 void forcaBruta(char *texto, char *padrao) {
     int n = strlen(texto);
@@ -24,14 +25,9 @@ void forcaBruta(char *texto, char *padrao) {
         }
     }
 
-    printf("\nComparações: %lld\n", comparacoes);
+    printf("\n\nComparações: %lld\n", comparacoes);
 }
 
 int main () {
-    char texto[] = "ABBABAACaaaaaaaaaaaaABAABCABAC";
-    char padrao[] = "ABAA";
-
-    forcaBruta(texto, padrao);
-
-    return 0;
+    executar_testes("Força Bruta", forcaBruta);
 }

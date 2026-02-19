@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "benchmark/benchmark.h"
 
 #define BASE 256
 #define MOD 101
@@ -48,14 +49,9 @@ void rabinKarp(char *texto, char *padrao) {
         }
     }
 
-    printf("\nComparações: %lld\n", comparacoes);
+    printf("\n\nComparações: %lld\n", comparacoes);
 }
 
 int main () {
-    char texto[] = "ABBABAACaaaaaaaaaaaaABAABCABAC";
-    char padrao[] = "ABAA";
-
-    rabinKarp(texto, padrao);
-
-    return 0;
+    executar_testes("Rabin-Karp", rabinKarp);
 }

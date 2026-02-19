@@ -1,6 +1,7 @@
 #include <limits.h>
 #include <stdio.h>
 #include <string.h>
+#include "../benchmark/benchmark.h"
 
 #define MAX_CHARS 256
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
@@ -45,14 +46,9 @@ void boyerMooreHorspool(char *texto, char *padrao) {
         shift += tabelaShift[(unsigned char)texto[shift + m - 1]];
     }
 
-    printf("\nComparações: %lld\n", comparacoes);
+    printf("\n\nComparações: %lld\n", comparacoes);
 }
 
 int main () {
-    char texto[] = "ABBABAACaaaaaaaaaaaaABAABCABAC";
-    char padrao[] = "ABAA";
-
-    boyerMooreHorspool(texto, padrao);
-
-    return 0;
+    executar_testes("Boyer-Moore-Horspool", boyerMooreHorspool);
 }

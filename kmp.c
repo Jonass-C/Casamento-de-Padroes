@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "benchmark/benchmark.h"
 
 void arrayLPS (char *padrao, int *lps) {
     int m = strlen(padrao);
@@ -67,14 +68,9 @@ void kmp (char *texto, char *padrao) {
         }
     }
 
-    printf("\nComparações: %lld\n", comparacoes);
+    printf("\n\nComparações: %lld\n", comparacoes);
 }
 
 int main () {
-    char texto[] = "BABABABABCABABCABAB";
-    char padrao[] = "ABABCABAB";
-
-    kmp(texto, padrao);
-
-    return 0;
+    executar_testes("KMP", kmp);
 }
